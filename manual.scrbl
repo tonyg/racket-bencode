@@ -71,7 +71,7 @@ port. Once end-of-file is reached, returns the terms as a list in the
 order they were read from the port. Errors are otherwise signalled as
 for @racket[bencode-read]. }
 
-@defproc[(bytes->bencode [bs bytes?]) any?]{ As
+@defproc[(bytes->bencode [bs bytes?]) list?]{ As
 @racket[bencode-read-to-end], but takes input from the supplied
 byte-vector instead of from an input-port. }
 
@@ -86,5 +86,8 @@ any of the other Bencode-reading functions defined in this library. }
 single term (which must be a Racket datum as specified in
 @secref{mapping}) to the given output-port. }
 
-@defproc[(bencode->bytes [term any?]) bytes?]{ Returns a byte-vector
-containing a Bencoded representation of the given term. }
+@defproc[(bencode->bytes [terms list?]) bytes?]{ Returns a byte-vector
+containing a Bencoded representation of the given list of terms, in
+the order they appear in the list. Note that it encodes a list of
+terms, not a single term, and so it is roughly an inverse of
+@racket[bytes->bencode]. }
