@@ -1,13 +1,16 @@
-PLANET_VERSION=1.1
+PLANET_MAJOR=1
+PLANET_MINOR=2
+PLANET_VERSION=$(PLANET_MAJOR).$(PLANET_MINOR)
+PLANET_NAME=bencode
 
 all:
 
-bencode.plt: clean
+$(PLANET_NAME).plt: clean
 	mkdir planet-build-temp
-	(cd planet-build-temp; git clone .. bencode)
-	(cd planet-build-temp/bencode; git checkout bencode.plt-${PLANET_VERSION})
-	(cd planet-build-temp; raco planet create bencode)
-	mv planet-build-temp/bencode.plt .
+	(cd planet-build-temp; git clone .. $(PLANET_NAME))
+	(cd planet-build-temp/$(PLANET_NAME); git checkout $(PLANET_NAME).plt-${PLANET_VERSION})
+	(cd planet-build-temp; raco planet create $(PLANET_NAME))
+	mv planet-build-temp/$(PLANET_NAME).plt .
 	rm -rf planet-build-temp
 
 manual.html: manual.scrbl
@@ -15,6 +18,14 @@ manual.html: manual.scrbl
 
 clean:
 	rm -f manual.html racket.css scribble-common.js scribble-style.css scribble.css
-	rm -f footnote.css
-	rm -rf planet-docs
-	rm -f bencode.plt
+	rm -rf planet-docs compiled
+	rm -f $(PLANET_NAME).plt
+
+link:
+	raco planet link tonyg $(PLANET_NAME).plt $(PLANET_MAJOR) $(PLANET_MINOR) $(CURDIR)
+
+unlink:
+	raco planet unlink tonyg $(PLANET_NAME).plt $(PLANET_MAJOR) $(PLANET_MINOR)
+
+tag:
+	git tag $(PLANET_NAME).plt-${PLANET_VERSION}
