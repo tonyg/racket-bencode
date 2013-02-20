@@ -9,3 +9,6 @@
 (define primary-file "main.rkt")
 (define repositories '("4.x"))
 (define scribblings '(("manual.scrbl" ())))
+
+(define racket-launcher-libraries '("dump.rkt"))
+(define racket-launcher-names '("bencode-dump"))
