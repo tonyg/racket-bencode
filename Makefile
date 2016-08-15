@@ -1,5 +1,17 @@
-PLANET_MAJOR=1
-PLANET_MINOR=2
-PLANET_NAME=bencode
-PLANET_USER=tonyg
-include Makefile.planet
+PACKAGENAME=bencode-codec
+COLLECTS=bencode-codec
+
+all: setup
+
+clean:
+	find . -name compiled -type d | xargs rm -rf
+	rm -rf bencode-codec/doc
+
+setup:
+	raco setup $(COLLECTS)
+
+link:
+	raco pkg install --link -n $(PACKAGENAME) $$(pwd)
+
+unlink:
+	raco pkg remove $(PACKAGENAME)

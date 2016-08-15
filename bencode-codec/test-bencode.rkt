@@ -1,7 +1,6 @@
 #lang racket/base
 
-(require "bencode.rkt")
-
+(require bencode-codec)
 (require rackunit)
 
 (check-equal? (bytes->bencode #"") '())

@@ -1,15 +1,10 @@
 #lang scribble/manual
 
-@(require planet/scribble
-	  scribble/racket
-	  scriblib/footnote
-	  (for-label racket
-		     (this-package-in main)))
+@(require scriblib/footnote
+	  (for-label racket bencode-codec))
 
-@title{racket-bencode}
+@title{bencode-codec}
 @author[(author+email "Tony Garnock-Jones" "tonygarnockjones@gmail.com")]
-
-@local-table-of-contents[]
 
 If you find that this library lacks some feature you need, or you have
 a suggestion for improving it, please don't hesitate to
@@ -51,7 +46,7 @@ the empty Bencode list.
 All the functionality below can be accessed with a single
 @racket[require]:
 
-@(defmodule/this-package main)
+@(defmodule bencode-codec)
 
 @subsection{Reading Bencoded data}
 
